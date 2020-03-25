@@ -1,5 +1,8 @@
 import React from 'react'
 import { fetchTopPosts, fetchPost } from '../utils/api'
+import PostList from './PostList'
+import Post from './Post'
+import Loading from './Loading'
 
 export default class Posts extends React.Component {
   state = {
@@ -9,27 +12,36 @@ export default class Posts extends React.Component {
   componentDidMount() {
     fetchTopPosts()
       .then(data => {
-        for(let i = 0; i < 50; i++){
-          fetchPost(data[i])
-            .then(result => {
-              this.setState(({ posts }) => ({
-                posts: posts.concat(result.title)
-              }))
-            })
-        }
+        this.setState({
+          posts: data
+        })
       })
   }
 
+  isLoading = () => {
+    return this.state.posts.length === 0
+  }
+
+
+//   render() {
+//     return(
+//       <ul>
+//         {this.state.posts.map((post, key) => (
+//           <li key={key}>
+//             <PostList post={post}/>
+//           </li>
+//         ))}
+//       </ul>
+//     )
+//   }
+// }
+
   render() {
-    console.log(this.state.posts.length)
     return(
-      <ul>
-        {this.state.posts.map((post, key) => (
-          <li key={key}>
-            {post}
-          </li>
-        ))}
-      </ul>
+      <div>
+        {this.isLoading() && <Loading text={'El que me da la gana'}/>}
+        {this.state.posts.length !== 0  && <Post post={this.state.posts[0]}/>}
+      </div>
     )
   }
 }

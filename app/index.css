@@ -9,3 +9,7 @@ html, body, #app {
   margin: 0 auto;
   padding: 50px;
 }*/
+
+ul {
+  list-style-type: none
+}
