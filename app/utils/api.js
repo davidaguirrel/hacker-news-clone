@@ -34,6 +34,32 @@ export function getKids(ids) {
     .then(kids => kids)
 }
 
+export function fetchUser(userId) {
+  const endpoint = `http://hacker-news.firebaseio.com/v0/user/${userId}.json?print=pretty`
+
+  return fetch(endpoint)
+    .then((res) => res.json())
+    .then((user) => {
+      return user
+      // return Promise.all(user.submitted.map(fetchPost))
+      //   .then(posts => {
+      //     return filterNoComments(posts)
+      //   })
+    })
+}
+
+function filterNoComments(posts) {
+  return posts.filter(post => post.type !== 'comment')
+}
+
+export function fetchPostsSubmitted(ids) {
+  return Promise.all(ids.map(fetchPost))
+    .then(posts => {
+      return filterNoComments(posts)
+    })
+}
+
+
 //   return fetch(endpoint)
 //     .then((res) => res.json())
 //     .then((data) => {
