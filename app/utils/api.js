@@ -29,9 +29,9 @@ function filterNoUrl(posts) {
   return posts.filter(post => !post.url)
 }
 
-export function getKids(array) {
-  return Promise.all(array.map(fetchPost))
-    .then(kids => console.log(kids))
+export function getKids(ids) {
+  return Promise.all(ids.map(fetchPost))
+    .then(kids => kids)
 }
 
 //   return fetch(endpoint)

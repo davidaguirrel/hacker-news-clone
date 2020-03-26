@@ -5,12 +5,20 @@ import { getKids } from '../utils/api'
 export default class Post extends React.Component {
   state = {
     post: this.props.post,
-    kids: ['a', 'b', 'c']
+    kids: []
   }
 
   componentDidMount() {
-    // getKids(this.state.post.kids)
-    //   .then(data => console.log(data))
+    getKids(this.state.post.kids)
+      .then(data => {
+        this.setState({
+          kids: data
+        })
+      })
+  }
+
+  isLoading = () => {
+    return this.state.kids.length === 0
   }
 
   render() {
@@ -21,7 +29,7 @@ export default class Post extends React.Component {
       hour: 'numeric',
       minute: 'numeric'
     })
-    console.log(post)
+
     return (
       <div className='post'>
         <h2>
@@ -29,12 +37,18 @@ export default class Post extends React.Component {
         </h2>
         <span>{`by ${by} on ${date} with ${descendants} comments `}</span>
         <p dangerouslySetInnerHTML={{__html: `${post.text}`}} />
+
+        {this.isLoading() && <Loading text={'Fetching Comments'}/>}
+
         {this.state.kids.length > 0 &&
           <div>
+            <h1>COMMENTS START HERE</h1>
             <ul>
               {this.state.kids.map((kid, index) => (
                 <li key={index}>
-                  {kid}
+                  {`Comment #${index}`}
+                  <p dangerouslySetInnerHTML={{__html: `${kid.text}`}}></p>
+                  }
                 </li>
               ))}
             </ul>

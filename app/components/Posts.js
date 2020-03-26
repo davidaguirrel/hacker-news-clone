@@ -40,7 +40,7 @@ export default class Posts extends React.Component {
     return(
       <div>
         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
-        {this.state.posts.length !== 0  && <Post post={this.state.posts[0]}/>}
+        {this.state.posts.length > 0  && <Post post={this.state.posts[0]}/>}
       </div>
     )
   }
