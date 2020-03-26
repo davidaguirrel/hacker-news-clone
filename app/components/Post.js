@@ -1,6 +1,8 @@
 import React from 'react'
 import Loading from './Loading'
 import { getKids } from '../utils/api'
+import Comment from './Comment'
+import PropTypes from 'prop-types'
 
 export default class Post extends React.Component {
   state = {
@@ -47,8 +49,7 @@ export default class Post extends React.Component {
               {this.state.kids.map((kid, index) => (
                 <li key={index}>
                   {`Comment #${index}`}
-                  <p dangerouslySetInnerHTML={{__html: `${kid.text}`}}></p>
-                  }
+                  <Comment comment={kid}/>
                 </li>
               ))}
             </ul>
@@ -57,4 +58,8 @@ export default class Post extends React.Component {
       </div>
     )
   }
+}
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired
 }
