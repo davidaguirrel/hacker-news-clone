@@ -11,7 +11,7 @@ export default class Posts extends React.Component {
   }
 
   componentDidMount() {
-    fetchTopPosts()
+    fetchTopPosts(this.props.type)
       .then(data => {
         this.setState({
           posts: data
@@ -19,24 +19,25 @@ export default class Posts extends React.Component {
       })
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.type !== this.props.type){
+      fetchTopPosts(this.props.type)
+        .then(data => {
+          this.setState({
+            posts: data
+          })
+        })
+    }
+  }
+
   isLoading = () => {
     return this.state.posts.length === 0
   }
 
-// render() {
-//     return(
-//       <div>
-//         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
-//         <User />
-//       </div>
-//     )
-//   }
-// }
-
-  render() {
+render() {
     return(
       <div>
-        {this.isLoading() && <Loading text={'El que me da la gana'}/>}
+        {this.isLoading() && <Loading />}
         <ul>
           {this.state.posts.map((post, key) => (
             <li key={key}>
@@ -48,6 +49,17 @@ export default class Posts extends React.Component {
     )
   }
 }
+
+
+// render() {
+//     return(
+//       <div>
+//         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
+//         <User />
+//       </div>
+//     )
+//   }
+// }
 
 //   render() {
 //     return(

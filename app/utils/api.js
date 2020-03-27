@@ -1,3 +1,6 @@
+const endpoint = 'http://hacker-news.firebaseio.com/v0'
+const json = '.json?print=pretty'
+
 export function fetchPost(id) {
   return fetch(`http://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
     .then((res) => {
@@ -5,11 +8,8 @@ export function fetchPost(id) {
     })
 }
 
-export function fetchTopPosts() {
-  const endpoint = 'http://hacker-news.firebaseio.com/v0/topstories.json?print=pretty'
-  let posts = []
-
-  return fetch(endpoint)
+export function fetchTopPosts(type) {
+  return fetch(`${endpoint}/${type}stories${json}`)
     .then((res) => res.json())
     .then((ids) => {
       if(!ids) {
