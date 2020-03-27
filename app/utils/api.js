@@ -20,14 +20,14 @@ export function fetchTopPosts() {
     .then((ids) => {
       return Promise.all(ids.map(fetchPost))
         .then(posts => {
-          return filterNoUrl(posts)
+          return posts
         })
     })
 }
 
-function filterNoUrl(posts) {
-  return posts.filter(post => !post.url)
-}
+// function filterNoUrl(posts) {
+//   return posts.filter(post => !post.url)
+// }
 
 export function getKids(ids) {
   return Promise.all(ids.map(fetchPost))

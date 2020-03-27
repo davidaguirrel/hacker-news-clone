@@ -23,28 +23,31 @@ export default class Posts extends React.Component {
     return this.state.posts.length === 0
   }
 
-render() {
+// render() {
+//     return(
+//       <div>
+//         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
+//         <User />
+//       </div>
+//     )
+//   }
+// }
+
+  render() {
     return(
       <div>
         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
-        <User />
+        <ul>
+          {this.state.posts.map((post, key) => (
+            <li key={key}>
+              <PostList post={post}/>
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }
 }
-
-//   render() {
-//     return(
-//       <ul>
-//         {this.state.posts.map((post, key) => (
-//           <li key={key}>
-//             <PostList post={post}/>
-//           </li>
-//         ))}
-//       </ul>
-//     )
-//   }
-// }
 
 //   render() {
 //     return(

@@ -1,12 +1,9 @@
 import React from 'react'
+import { formatDate } from '../utils/helpers'
 
 export default function PostList ( {post} ) {
   const { by, title, time, descendants, url } = post
-  const date = new Date(time * 1000)
-    .toLocaleDateString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric'
-    })
+
 
 
 //AQUÍ TENDRÉ QUE METER LINK PARA LLEVAR A POST
@@ -23,7 +20,13 @@ export default function PostList ( {post} ) {
             </div>
         }
       </h3>
-      <span>{`by ${by} on ${date} with ${descendants} comments `}</span>
+      <div>
+        <span>by </span>
+        <a href="">{by} </a>
+        <span>on {formatDate(time)} with </span>
+        <a href="">{descendants} </a>
+        <span>comments</span>
+      </div>
     </div>
   )
 }

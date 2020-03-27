@@ -3,6 +3,7 @@ import Loading from './Loading'
 import { getKids } from '../utils/api'
 import Comment from './Comment'
 import PropTypes from 'prop-types'
+import { formatDate } from '../utils/helpers'
 
 export default class Post extends React.Component {
   state = {
@@ -26,19 +27,18 @@ export default class Post extends React.Component {
   render() {
     const { post } = this.state
     const { title, by, time, descendants } = post
-    const date = new Date(time * 1000)
-    .toLocaleDateString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric'
-    })
 
     return (
       <div className='post'>
         <h2>
           {post.title}
         </h2>
-        <span>{`by ${by} on ${date} with ${descendants} comments `}</span>
-        <p dangerouslySetInnerHTML={{__html: `${post.text}`}} />
+        <div>
+          <span>by </span>
+          <a href="">{by} </a>
+          <span>on {formatDate(time)} with {descendants} comments</span>
+        </div>
+        {post.text && <p dangerouslySetInnerHTML={{__html: `${post.text}`}} />}
 
         {this.isLoading() && <Loading text={'Fetching Comments'}/>}
 
