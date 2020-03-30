@@ -2,6 +2,8 @@ import React from 'react'
 import { fetchUser, fetchPostsSubmitted } from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
+import queryString from 'query-string'
+import { Link } from 'react-router-dom'
 
 export default class User extends React.Component {
   state = {
@@ -10,8 +12,9 @@ export default class User extends React.Component {
   }
 
   componentDidMount() {
-    const by = 'soapdog'
-    fetchUser(by)
+    const { id } = queryString.parse(this.props.location.search)
+
+    fetchUser(id)
       .then(data => {
         this.setState({
           user: data
@@ -34,7 +37,7 @@ export default class User extends React.Component {
         {user.karma &&
           <div>
             <h2>
-              {this.state.user.id}
+              {user.id}
             </h2>
             <span>joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma</span>
           </div>
@@ -48,8 +51,20 @@ export default class User extends React.Component {
                   <li key={index}>
                     {post.title}
                     <br/>
-                    <span>{`by ${user.id} on ${formatDate(post.time)} with `}</span>
-                    <a href="">{post.descendants}</a>
+                    <span>by </span>
+                    <Link to={{
+                        pathname: '/user',
+                        search: `?id=${user.id}`
+                    }}>
+                      {user.id}
+                    </Link>
+                    <span> on {formatDate(post.time)} with </span>
+                    <Link to={{
+                      pathname: '/post',
+                      search: `?id=${post.id}`
+                    }}>
+                      {post.descendants}
+                    </Link>
                     <span> comments</span>
                   </li>
                 ))}

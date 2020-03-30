@@ -4,18 +4,29 @@ import { getKids } from '../utils/api'
 import Comment from './Comment'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
+import queryString from 'query-string'
+import { fetchPost } from '../utils/api'
+import { Link } from 'react-router-dom'
 
 export default class Post extends React.Component {
   state = {
-    post: this.props.post,
+    post: {},
     kids: []
   }
 
   componentDidMount() {
-    getKids(this.state.post.kids)
-      .then(data => {
+    const { id } = queryString.parse(this.props.location.search)
+
+    fetchPost(id)
+      .then(post => {
         this.setState({
-          kids: data
+          post: post
+        })
+        getKids(this.state.post.kids)
+        .then(data => {
+          this.setState({
+            kids: data
+          })
         })
       })
   }
@@ -25,28 +36,40 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const { post } = this.state
-    const { title, by, time, descendants } = post
+    const { post, kids } = this.state
+    const { title, by, time, descendants, id, text } = post
 
     return (
       <div className='post'>
         <h2>
-          {post.title}
+          {title}
         </h2>
         <div>
           <span>by </span>
-          <a href="">{by} </a>
-          <span>on {formatDate(time)} with {descendants} comments</span>
+          <Link to={{
+            pathname: '/user',
+            search: `?id=${by}`
+          }}>
+            {by}
+          </Link>
+          <span> on {formatDate(time)} with </span>
+          <Link to={{
+            pathname: 'post',
+            search: `?id=${id}`
+          }}>
+            {descendants}
+          </Link>
+          <span> comments</span>
         </div>
-        {post.text && <p dangerouslySetInnerHTML={{__html: `${post.text}`}} />}
+        {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
 
         {this.isLoading() && <Loading text={'Fetching Comments'}/>}
 
-        {this.state.kids.length > 0 &&
+        {kids.length > 0 &&
           <div>
             <h1>COMMENTS START HERE</h1>
             <ul>
-              {this.state.kids.map((kid, index) => (
+              {kids.map((kid, index) => (
                 <li key={index}>
                   {`Comment #${index}`}
                   <Comment comment={kid}/>
@@ -58,8 +81,4 @@ export default class Post extends React.Component {
       </div>
     )
   }
-}
-
-Post.propTypes = {
-  post: PropTypes.object.isRequired
 }

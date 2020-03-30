@@ -1,31 +1,43 @@
 import React from 'react'
 import { formatDate } from '../utils/helpers'
+import { Link } from 'react-router-dom'
 
-export default function PostList ( {post} ) {
-  const { by, title, time, descendants, url } = post
-
-
-
-//AQUÍ TENDRÉ QUE METER LINK PARA LLEVAR A POST
+export default function PostList ( { post } ) {
+  const { by, title, time, descendants, url, id } = post
 
   return (
     <div className='list-item'>
       <h3>
         {url
           ? <a href={url}>
-              {post.title}
+              {title}
             </a>
-          : <div>
-              {post.title}
-            </div>
+          : <Link style={{color: 'orange'}} to={{
+              pathname: '/post',
+              search: `?id=${id}`
+            }}>
+              {title}
+            </Link>
         }
       </h3>
       <div>
         <span>by </span>
-        <a href="">{by} </a>
-        <span>on {formatDate(time)} with </span>
-        <a href="">{descendants} </a>
-        <span>comments</span>
+        <Link
+          to={{
+            pathname: '/user',
+            search: `?id=${by}`
+          }}
+        >
+          {by}
+        </Link>
+        <span> on {formatDate(time)} with </span>
+        <Link to={{
+          pathname: '/post',
+          search: `?id=${id}`
+        }}>
+          {descendants}
+        </Link>
+        <span> comments</span>
       </div>
     </div>
   )

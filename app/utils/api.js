@@ -6,6 +6,12 @@ export function fetchPost(id) {
     .then((res) => {
       return res.json()
     })
+    .then(data => {
+      if(!data){
+        throw new Error('There was an error fetching the post')
+      }
+      return data
+    })
 }
 
 export function fetchTopPosts(type) {
@@ -25,10 +31,6 @@ export function fetchTopPosts(type) {
     })
 }
 
-// function filterNoUrl(posts) {
-//   return posts.filter(post => !post.url)
-// }
-
 export function getKids(ids) {
   return Promise.all(ids.map(fetchPost))
     .then(kids => kids)
@@ -41,10 +43,6 @@ export function fetchUser(userId) {
     .then((res) => res.json())
     .then((user) => {
       return user
-      // return Promise.all(user.submitted.map(fetchPost))
-      //   .then(posts => {
-      //     return filterNoComments(posts)
-      //   })
     })
 }
 

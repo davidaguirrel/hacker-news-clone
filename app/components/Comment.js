@@ -1,19 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
+import { Link } from 'react-router-dom'
 
-export default function Comment ({ comment }) {
+export default function Comment ({ comment = {} }) {
   const { by, time, text } = comment
 
-//NEED TO ADD LINK FOR USER
   return (
     <div>
-      <span>{`by ${by} on ${formatDate(time)}`}</span>
+      <span>by </span>
+      <Link to={{
+        pathname: '/user',
+        search: `?id=${by}`
+      }}>
+        {by}
+      </Link>
+      <span> on {formatDate(time)}</span>
       <p dangerouslySetInnerHTML={{__html: `${comment.text}`}}></p>
     </div>
   )
 }
 
 Comment.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object
 }

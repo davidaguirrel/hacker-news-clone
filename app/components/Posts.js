@@ -7,7 +7,8 @@ import User from './User'
 
 export default class Posts extends React.Component {
   state = {
-    posts: []
+    posts: [],
+    error: null
   }
 
   componentDidMount() {
@@ -15,6 +16,13 @@ export default class Posts extends React.Component {
       .then(data => {
         this.setState({
           posts: data
+        })
+      })
+      .catch(() => {
+        console.warn('Error fetching posts: ', error)
+
+        this.setState({
+          error: 'There was an error fetching posts'
         })
       })
   }
@@ -31,10 +39,10 @@ export default class Posts extends React.Component {
   }
 
   isLoading = () => {
-    return this.state.posts.length === 0
+    return this.state.posts.length === 0 && this.state.error === null
   }
 
-render() {
+  render() {
     return(
       <div>
         {this.isLoading() && <Loading />}
@@ -49,24 +57,3 @@ render() {
     )
   }
 }
-
-
-// render() {
-//     return(
-//       <div>
-//         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
-//         <User />
-//       </div>
-//     )
-//   }
-// }
-
-//   render() {
-//     return(
-//       <div>
-//         {this.isLoading() && <Loading text={'El que me da la gana'}/>}
-//         {this.state.posts.length > 0  && <Post post={this.state.posts[0]}/>}
-//       </div>
-//     )
-//   }
-// }
