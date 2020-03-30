@@ -33,7 +33,9 @@ export function fetchTopPosts(type) {
 
 export function getKids(ids) {
   return Promise.all(ids.map(fetchPost))
-    .then(kids => kids)
+    .then(kids => {
+      return kids
+    })
 }
 
 export function fetchUser(userId) {

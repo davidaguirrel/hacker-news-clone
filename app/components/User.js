@@ -21,9 +21,15 @@ export default class User extends React.Component {
         })
         fetchPostsSubmitted(this.state.user.submitted)
           .then(data => {
-            this.setState({
-              postsSubmitted: data
-            })
+            if(data) {
+              this.setState({
+                postsSubmitted: data
+              })
+            } else {
+              this.setState({
+                postsSubmitted: null
+              })
+            }
           })
       })
 
@@ -42,6 +48,9 @@ export default class User extends React.Component {
             <span>joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma</span>
           </div>
         }
+
+        {!postsSubmitted && <span>This user does not have any posts</span>}
+
         {postsSubmitted.length === 0
           ? <Loading text={'Fetching Posts'}/>
           : <div>

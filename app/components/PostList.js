@@ -12,7 +12,7 @@ export default function PostList ( { post } ) {
           ? <a href={url}>
               {title}
             </a>
-          : <Link style={{color: 'orange'}} to={{
+          : <Link to={{
               pathname: '/post',
               search: `?id=${id}`
             }}>

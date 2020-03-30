@@ -6,7 +6,6 @@ export default class Loading extends React.Component {
     text: this.props.text
   }
   render() {
-    console.log('Loading')
     return(
       <h2>{this.state.text}</h2>
     )

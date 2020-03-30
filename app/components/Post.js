@@ -22,12 +22,19 @@ export default class Post extends React.Component {
         this.setState({
           post: post
         })
-        getKids(this.state.post.kids)
-        .then(data => {
+
+        if(this.state.post.kids) {
+          getKids(this.state.post.kids)
+            .then(data => {
+              this.setState({
+                kids: data
+              })
+            })
+        } else {
           this.setState({
-            kids: data
+            kids: null
           })
-        })
+        }
       })
   }
 
@@ -63,20 +70,21 @@ export default class Post extends React.Component {
         </div>
         {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
 
-        {this.isLoading() && <Loading text={'Fetching Comments'}/>}
+        {!kids && null}
 
-        {kids.length > 0 &&
-          <div>
-            <h1>COMMENTS START HERE</h1>
-            <ul>
-              {kids.map((kid, index) => (
-                <li key={index}>
-                  {`Comment #${index}`}
-                  <Comment comment={kid}/>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {kids.length === 0
+          ? this.isLoading() && <Loading text={'Fetching Comments'}/>
+          : <div>
+              <h1>COMMENTS START HERE</h1>
+              <ul>
+                {kids.map((kid, index) => (
+                  <li key={index}>
+                    {`Comment #${index}`}
+                    <Comment comment={kid}/>
+                  </li>
+                ))}
+              </ul>
+            </div>
         }
       </div>
     )
