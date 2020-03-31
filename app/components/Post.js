@@ -44,14 +44,14 @@ export default class Post extends React.Component {
 
   render() {
     const { post, kids } = this.state
-    const { title, by, time, descendants, id, text } = post
+    const { title, by, time, descendants, id, text, url } = post
 
     return (
       <div className='post'>
-        <h2>
-          {title}
+        <h2 className='title'>
+          <a href={url}>{title}</a>
         </h2>
-        <div>
+        <div className='metadata'>
           <span>by </span>
           <Link to={{
             pathname: '/user',
@@ -75,11 +75,12 @@ export default class Post extends React.Component {
         {kids.length === 0
           ? this.isLoading() && <Loading text={'Fetching Comments'}/>
           : <div>
-              <h1>COMMENTS START HERE</h1>
               <ul>
                 {kids.map((kid, index) => (
-                  <li key={index}>
-                    {`Comment #${index}`}
+                  <li
+                    className='comment-item'
+                    key={index}
+                  >
                     <Comment comment={kid}/>
                   </li>
                 ))}

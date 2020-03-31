@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
   }
   render() {
     return(
-      <h2>{this.state.text}</h2>
+      <h2 className='center'>{this.state.text}</h2>
     )
   }
 }

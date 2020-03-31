@@ -7,13 +7,14 @@ const activeStyle = {
 
 export default function Nav(props) {
   return(
-    <div>
-      <ul>
+    <div className='nav'>
+      <ul className='row'>
         <li>
           <NavLink
             exact
             to='/'
             activeStyle={activeStyle}
+            className='nav-link'
             onClick={() => props.onPostTypeChange('top')}
           >
             Top
@@ -23,6 +24,7 @@ export default function Nav(props) {
           <NavLink
             to='/new'
             activeStyle={activeStyle}
+            className='nav-link'
             onClick={() => props.onPostTypeChange('new')}
           >
             New

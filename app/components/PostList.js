@@ -7,7 +7,7 @@ export default function PostList ( { post } ) {
 
   return (
     <div className='list-item'>
-      <h3>
+      <h3 className='title'>
         {url
           ? <a href={url}>
               {title}
@@ -20,8 +20,8 @@ export default function PostList ( { post } ) {
             </Link>
         }
       </h3>
-      <div>
-        <span>by </span>
+      <div className='metadata'>
+        <span>{`by `}</span>
         <Link
           to={{
             pathname: '/user',

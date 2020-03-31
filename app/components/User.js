@@ -39,13 +39,15 @@ export default class User extends React.Component {
     const { user, postsSubmitted } = this.state
 
     return (
-      <div>
+      <div className='user'>
         {user.karma &&
           <div>
-            <h2>
+            <h2 className='title'>
               {user.id}
             </h2>
-            <span>joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma</span>
+            <span className='metadata'>
+              joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma
+            </span>
           </div>
         }
 
@@ -57,24 +59,28 @@ export default class User extends React.Component {
               <h3>POSTS</h3>
               <ul>
                 {this.state.postsSubmitted.map((post, index) => (
-                  <li key={index}>
-                    {post.title}
-                    <br/>
-                    <span>by </span>
-                    <Link to={{
-                        pathname: '/user',
-                        search: `?id=${user.id}`
-                    }}>
-                      {user.id}
-                    </Link>
-                    <span> on {formatDate(post.time)} with </span>
-                    <Link to={{
-                      pathname: '/post',
-                      search: `?id=${post.id}`
-                    }}>
-                      {post.descendants}
-                    </Link>
-                    <span> comments</span>
+                  <li key={index} className='list-item'>
+                    <h3 className='title'>
+                      <a href={post.url}>{post.title}</a>
+                    </h3>
+
+                    <div className='metadata'>
+                      <span>by </span>
+                      <Link to={{
+                          pathname: '/user',
+                          search: `?id=${user.id}`
+                      }}>
+                        {user.id}
+                      </Link>
+                      <span> on {formatDate(post.time)} with </span>
+                      <Link to={{
+                        pathname: '/post',
+                        search: `?id=${post.id}`
+                      }}>
+                        {post.descendants}
+                      </Link>
+                      <span> comments</span>
+                    </div>
                   </li>
                 ))}
               </ul>

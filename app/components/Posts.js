@@ -12,6 +12,7 @@ export default class Posts extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     fetchTopPosts(this.props.type)
       .then(data => {
         this.setState({
@@ -19,7 +20,7 @@ export default class Posts extends React.Component {
         })
       })
       .catch(() => {
-        console.warn('Error fetching posts: ', error)
+        console.warn('Error fetching posts: ', this.state.error)
 
         this.setState({
           error: 'There was an error fetching posts'
