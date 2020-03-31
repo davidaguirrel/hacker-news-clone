@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'
 export default class User extends React.Component {
   state = {
     user: {},
-    postsSubmitted: []
+    postsSubmitted: [],
+    error: null
   }
 
   componentDidMount() {
@@ -31,6 +32,13 @@ export default class User extends React.Component {
               })
             }
           })
+      })
+      .catch(() => {
+        console.warn('Error fetching this user :', this.state.error)
+
+        this.setState({
+          error: 'There was an error fetching this user'
+        })
       })
 
   }

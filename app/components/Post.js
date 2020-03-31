@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom'
 export default class Post extends React.Component {
   state = {
     post: {},
-    kids: []
+    kids: [],
+    error: null
   }
 
   componentDidMount() {
@@ -35,6 +36,13 @@ export default class Post extends React.Component {
             kids: null
           })
         }
+      })
+      .catch(() => {
+        console.warn('Error fetching this post: ', this.state.error)
+
+        this.setState({
+          error: 'There was an error fetching this post'
+        })
       })
   }
 
@@ -70,7 +78,7 @@ export default class Post extends React.Component {
         </div>
         {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
 
-        {!kids && null}
+        {!kids && <p>This post does not have any comments yet</p>}
 
         {kids.length === 0
           ? this.isLoading() && <Loading text={'Fetching Comments'}/>
