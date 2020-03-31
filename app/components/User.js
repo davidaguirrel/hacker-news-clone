@@ -40,30 +40,37 @@ export default class User extends React.Component {
           error: 'There was an error fetching this user'
         })
       })
+  }
 
+  isLoading = () => {
+    return this.state.postsSubmitted.length === 0 && this.state.error === null
   }
 
   render() {
     const { user, postsSubmitted } = this.state
+    const { id } = queryString.parse(this.props.location.search)
+    console.log(id)
 
     return (
       <div className='user'>
-        {user.karma &&
-          <div>
-            <h2 className='title'>
-              {user.id}
-            </h2>
+        <div>
+          <h2 className='title'>
+            {id}
+          </h2>
+          {user.karma &&
             <span className='metadata'>
               joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma
             </span>
-          </div>
-        }
+          }
+        </div>
 
         {!postsSubmitted && <span>This user does not have any posts</span>}
 
-        {postsSubmitted.length === 0
-          ? <Loading text={'Fetching Posts'}/>
-          : <div>
+        {postsSubmitted &&
+          <React.Fragment>
+            {this.isLoading() && <Loading text={'Fetching Posts'}/>}
+
+            <div>
               <h3>POSTS</h3>
               <ul>
                 {this.state.postsSubmitted.map((post, index) => (
@@ -93,6 +100,7 @@ export default class User extends React.Component {
                 ))}
               </ul>
             </div>
+          </React.Fragment>
         }
       </div>
     )

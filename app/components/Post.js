@@ -47,7 +47,7 @@ export default class Post extends React.Component {
   }
 
   isLoading = () => {
-    return this.state.kids.length === 0
+    return this.state.kids.length === 0 && this.state.error === null
   }
 
   render() {
@@ -78,11 +78,13 @@ export default class Post extends React.Component {
         </div>
         {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
 
-        {!kids && <p>This post does not have any comments yet</p>}
+        {!kids && <span>This post does not have any comments yet</span>}
 
-        {kids.length === 0
-          ? this.isLoading() && <Loading text={'Fetching Comments'}/>
-          : <div>
+        {kids &&
+          <React.Fragment>
+            {this.isLoading() && <Loading text={'Fetching Comments'}/>}
+
+            <div>
               <ul>
                 {kids.map((kid, index) => (
                   <li
@@ -94,6 +96,7 @@ export default class Post extends React.Component {
                 ))}
               </ul>
             </div>
+          </React.Fragment>
         }
       </div>
     )
