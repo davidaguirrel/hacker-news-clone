@@ -1,8 +1,8 @@
-const endpoint = 'http://hacker-news.firebaseio.com/v0'
+const endpoint = 'https://hacker-news.firebaseio.com/v0'
 const json = '.json?print=pretty'
 
 export function fetchPost(id) {
-  return fetch(`http://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+  return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
     .then((res) => {
       return res.json()
     })
@@ -39,7 +39,7 @@ export function getKids(ids) {
 }
 
 export function fetchUser(userId) {
-  const endpoint = `http://hacker-news.firebaseio.com/v0/user/${userId}.json?print=pretty`
+  const endpoint = `https://hacker-news.firebaseio.com/v0/user/${userId}.json?print=pretty`
 
   return fetch(endpoint)
     .then((res) => res.json())
