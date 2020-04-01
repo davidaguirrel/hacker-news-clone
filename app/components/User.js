@@ -49,7 +49,6 @@ export default class User extends React.Component {
   render() {
     const { user, postsSubmitted } = this.state
     const { id } = queryString.parse(this.props.location.search)
-    console.log(id)
 
     return (
       <div className='user'>

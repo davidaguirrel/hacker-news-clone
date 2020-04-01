@@ -15,7 +15,6 @@ export default function Nav(props) {
             to='/'
             activeStyle={activeStyle}
             className='nav-link'
-            onClick={() => props.onPostTypeChange('top')}
           >
             Top
           </NavLink>
@@ -25,7 +24,6 @@ export default function Nav(props) {
             to='/new'
             activeStyle={activeStyle}
             className='nav-link'
-            onClick={() => props.onPostTypeChange('new')}
           >
             New
           </NavLink>
