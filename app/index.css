@@ -8,10 +8,23 @@ body {
   font-family: "Lucida Console", Monaco, Arial, monospace;
 }
 
-/*@font-face {
-  font-family: robotoMono;
-  src: url(css/RobotoMono-Regular.ttf);
-}*/
+.dark {
+  color: white;
+  background: #1c2022;
+  min-height: 100%;
+}
+
+.dark a {
+  color: lightblue;
+}
+
+.light h2 {
+  color: black;
+}
+
+.dark h2 {
+  color: white;
+}
 
 .container {
   max-width: 1200px;
@@ -37,6 +50,11 @@ ul {
   color: inherit;
 }
 
+.theme-btn {
+  background: none;
+  border: none;
+}
+
 .center {
   text-align: center;
 }
@@ -46,7 +64,7 @@ ul {
   margin-bottom: 25px;
 }
 
-.title {
+.title-light {
   margin-top: 0px;
   margin-bottom: 1px;
   text-decoration: none;
@@ -54,26 +72,47 @@ ul {
   font-size: 18px;
 }
 
-.title a {
+.title-light a {
   text-decoration: none;
   color: inherit;
 }
 
-.title a:visited {
+.title-light a:visited {
   color: #000363;
 }
 
-.metadata {
+.title-dark {
+  margin-top: 0px;
+  margin-bottom: 1px;
+  text-decoration: none;
+  color: #256bef;
+  font-size: 18px;
+}
+
+.title-dark a {
+  color: #b5d3ff;
+}
+
+.title-dark a:visited {
+  color: #234cad;
+}
+
+.metadata-light {
   font-size: 14px;
   color: grey;
 }
 
-.metadata a {
+.metadata-light a {
   color: black;
 }
 
-.metadata a:visited {
-  font-weight: bold
+.metadata-dark {
+  font-size: 14px;
+  color: #858585;
+}
+
+.metadata-dark a {
+  color: #c1c1c1;
 }
 
 /*a {color:#FF0000;}         /* Unvisited link  */
@@ -82,12 +121,12 @@ ul {
 /*a:active {color:#0000FF;}*/
 
 
-h2.title {
+.post h2, .user h2 {
   font-size: 27px;
   margin-top: 40px;
 }
 
-.comment-item {
+.comment-light {
   margin-top: 10px;
   background-color: #efefef;
   border-radius: 8px;
@@ -98,6 +137,18 @@ h2.title {
   font-size: 15px;
 }
 
-/*.comment {
-  font-size: 19px;
-}*/
+.comment-dark {
+  margin-top: 10px;
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 15px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}

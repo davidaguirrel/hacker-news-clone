@@ -7,6 +7,7 @@ import { formatDate } from '../utils/helpers'
 import queryString from 'query-string'
 import { fetchPost } from '../utils/api'
 import { Link } from 'react-router-dom'
+import { ThemeConsumer } from '../contexts/theme'
 
 export default class Post extends React.Component {
   state = {
@@ -55,50 +56,54 @@ export default class Post extends React.Component {
     const { title, by, time, descendants, id, text, url } = post
 
     return (
-      <div className='post'>
-        <h2 className='title'>
-          <a href={url}>{title}</a>
-        </h2>
-        <div className='metadata'>
-          <span>by </span>
-          <Link to={{
-            pathname: '/user',
-            search: `?id=${by}`
-          }}>
-            {by}
-          </Link>
-          <span> on {formatDate(time)} with </span>
-          <Link to={{
-            pathname: 'post',
-            search: `?id=${id}`
-          }}>
-            {descendants}
-          </Link>
-          <span> comments</span>
-        </div>
-        {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
-
-        {!kids && <span>This post does not have any comments yet</span>}
-
-        {kids &&
-          <React.Fragment>
-            {this.isLoading() && <Loading text={'Fetching Comments'}/>}
-
-            <div>
-              <ul>
-                {kids.map((kid, index) => (
-                  <li
-                    className='comment-item'
-                    key={index}
-                  >
-                    <Comment comment={kid}/>
-                  </li>
-                ))}
-              </ul>
+      <ThemeConsumer>
+        {({ theme }) => (
+          <div className='post'>
+            <h2 className={`title-${theme}`}>
+              <a href={url}>{title}</a>
+            </h2>
+            <div className={`metadata-${theme}`}>
+              <span>by </span>
+              <Link to={{
+                pathname: '/user',
+                search: `?id=${by}`
+              }}>
+                {by}
+              </Link>
+              <span> on {formatDate(time)} with </span>
+              <Link to={{
+                pathname: 'post',
+                search: `?id=${id}`
+              }}>
+                {descendants}
+              </Link>
+              <span> comments</span>
             </div>
-          </React.Fragment>
-        }
-      </div>
+            {text && <p dangerouslySetInnerHTML={{__html: `${text}`}} />}
+
+            {!kids && <span>This post does not have any comments yet</span>}
+
+            {kids &&
+              <React.Fragment>
+                {this.isLoading() && <Loading text={'Fetching Comments'}/>}
+
+                <div>
+                  <ul>
+                    {kids.map((kid, index) => (
+                      <li
+                        className={`comment-${theme}`}
+                        key={index}
+                      >
+                        <Comment comment={kid}/>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </React.Fragment>
+            }
+          </div>
+        )}
+      </ThemeConsumer>
     )
   }
 }

@@ -4,6 +4,7 @@ import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
+import { ThemeConsumer } from '../contexts/theme'
 
 export default class User extends React.Component {
   state = {
@@ -51,57 +52,61 @@ export default class User extends React.Component {
     const { id } = queryString.parse(this.props.location.search)
 
     return (
-      <div className='user'>
-        <div>
-          <h2 className='title'>
-            {id}
-          </h2>
-          {user.karma &&
-            <span className='metadata'>
-              joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma
-            </span>
-          }
-        </div>
-
-        {!postsSubmitted && <span>This user does not have any posts</span>}
-
-        {postsSubmitted &&
-          <React.Fragment>
-            {this.isLoading() && <Loading text={'Fetching Posts'}/>}
-
+      <ThemeConsumer>
+        {({ theme }) => (
+          <div className='user'>
             <div>
-              <h3>POSTS</h3>
-              <ul>
-                {this.state.postsSubmitted.map((post, index) => (
-                  <li key={index} className='list-item'>
-                    <h3 className='title'>
-                      <a href={post.url}>{post.title}</a>
-                    </h3>
-
-                    <div className='metadata'>
-                      <span>by </span>
-                      <Link to={{
-                          pathname: '/user',
-                          search: `?id=${user.id}`
-                      }}>
-                        {user.id}
-                      </Link>
-                      <span> on {formatDate(post.time)} with </span>
-                      <Link to={{
-                        pathname: '/post',
-                        search: `?id=${post.id}`
-                      }}>
-                        {post.descendants}
-                      </Link>
-                      <span> comments</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <h2 className={`title-${theme}`}>
+                {id}
+              </h2>
+              {user.karma &&
+                <span className={`metadata-${theme}`}>
+                  joined {formatDate(user.created)} has {user.karma.toLocaleString('en-US')} karma
+                </span>
+              }
             </div>
-          </React.Fragment>
-        }
-      </div>
+
+            {!postsSubmitted && <span>This user does not have any posts</span>}
+
+            {postsSubmitted &&
+              <React.Fragment>
+                {this.isLoading() && <Loading text={'Fetching Posts'}/>}
+
+                <div>
+                  <h3>POSTS</h3>
+                  <ul>
+                    {this.state.postsSubmitted.map((post, index) => (
+                      <li key={index} className='list-item'>
+                        <h3 className={`title-${theme}`}>
+                          <a href={post.url}>{post.title}</a>
+                        </h3>
+
+                        <div className={`metadata-${theme}`}>
+                          <span>by </span>
+                          <Link to={{
+                              pathname: '/user',
+                              search: `?id=${user.id}`
+                          }}>
+                            {user.id}
+                          </Link>
+                          <span> on {formatDate(post.time)} with </span>
+                          <Link to={{
+                            pathname: '/post',
+                            search: `?id=${post.id}`
+                          }}>
+                            {post.descendants}
+                          </Link>
+                          <span> comments</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </React.Fragment>
+            }
+          </div>
+        )}
+      </ThemeConsumer>
     )
   }
 }
