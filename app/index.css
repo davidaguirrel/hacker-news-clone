@@ -4,7 +4,7 @@ html, body, #app {
   width: 100%;
 }
 .container {
-  max-width: 1200px;
+  /*max-width: 1200px;*/
   width: 75%;
   margin: 0 auto;
   padding: 50px;
@@ -151,45 +151,47 @@ ul {
 
 @media only screen and (min-width: 700px) {
   .container {
-    width: 100%;
+    /*width: 100%;*/
   }
 
   .nav-link {
-    font-size: 28px;
+    font-size: 40px;
   }
 
   .title-light {
-    font-size: 24px;
+    font-size: 36px;
   }
 
   .title-dark {
-    font-size: 24px;
+    font-size: 36px;
   }
 
   .metadata-light {
-    font-size: 18px;
+    font-size: 28px;
   }
 
   .metadata-dark {
-    font-size: 18px;
+    font-size: 28px;
   }
 
   .post h2, .user h2 {
-    font-size: 33px;
+    font-size: 45px;
   }
 
   .comment-light {
-    font-size: 19px;
+    font-size: 31px;
   }
 
   .comment-dark {
-    font-size: 19px;
+    font-size: 31px;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .container {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .nav-link {
@@ -222,6 +224,10 @@ ul {
 
   .comment-dark {
     font-size: 15px;
+  }
+
+  .theme-btn {
+    font-size: 30px;
   }
 }
 

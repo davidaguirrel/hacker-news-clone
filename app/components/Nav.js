@@ -34,7 +34,7 @@ export default function Nav() {
           </ul>
           <button
             className='theme-btn'
-            style={{fontSize: 30}}
+            style={{fontSize: 40}}
             onClick={toggleTheme}
             >
             {theme === 'light' ? '🔦' : '💡' }
