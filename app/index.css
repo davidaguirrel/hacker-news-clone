@@ -3,6 +3,12 @@ html, body, #app {
   height: 100%;
   width: 100%;
 }
+.container {
+  max-width: 1200px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 50px;
+}
 
 body {
   font-family: "Lucida Console", Monaco, Arial, monospace;
@@ -26,12 +32,6 @@ body {
   color: white;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -44,7 +44,7 @@ ul {
 
 .nav-link {
   margin-right: 10px;
-  font-size: 23px;
+  font-size: 30px;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
@@ -69,7 +69,7 @@ ul {
   margin-bottom: 1px;
   text-decoration: none;
   color: #256bef;
-  font-size: 18px;
+  font-size: 26px;
 }
 
 .title-light a {
@@ -86,7 +86,7 @@ ul {
   margin-bottom: 1px;
   text-decoration: none;
   color: #256bef;
-  font-size: 18px;
+  font-size: 26px;
 }
 
 .title-dark a {
@@ -98,7 +98,7 @@ ul {
 }
 
 .metadata-light {
-  font-size: 14px;
+  font-size: 20px;
   color: grey;
 }
 
@@ -107,7 +107,7 @@ ul {
 }
 
 .metadata-dark {
-  font-size: 14px;
+  font-size: 20px;
   color: #858585;
 }
 
@@ -115,40 +115,75 @@ ul {
   color: #c1c1c1;
 }
 
-/*a {color:#FF0000;}         /* Unvisited link  */
-/*a:visited {color:#00FF00;}  Visited link    */
-/*a:hover {color:#FF00FF;}   /* Mouse over link */
-/*a:active {color:#0000FF;}*/
-
-
 .post h2, .user h2 {
-  font-size: 27px;
+  font-size: 35px;
   margin-top: 40px;
 }
 
 .comment-light {
-  margin-top: 10px;
+  margin-top: 15px;
   background-color: #efefef;
   border-radius: 8px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 8px;
-  padding-right: 8px;
-  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 21px;
+  overflow-wrap: break-word;
 }
 
 .comment-dark {
-  margin-top: 10px;
+  margin-top: 15px;
   background-color: #3a3a3a;
   border-radius: 8px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 8px;
-  padding-right: 8px;
-  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 21px;
+  overflow-wrap: break-word;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
 }
+
+@media only screen and (min-width: 700px) {
+  .container {
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 23px;
+  }
+
+  .title-light {
+    font-size: 18px;
+  }
+
+  .title-dark {
+    font-size: 18px;
+  }
+
+  .metadata-light {
+    font-size: 14px;
+  }
+
+  .metadata-dark {
+    font-size: 14px;
+  }
+
+  .post h2, .user h2 {
+    font-size: 27px;
+  }
+
+  .comment-light {
+    font-size: 15px;
+  }
+
+  .comment-dark {
+    font-size: 15px;
+  }
+}
+
