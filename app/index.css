@@ -155,6 +155,44 @@ ul {
   }
 
   .nav-link {
+    font-size: 28px;
+  }
+
+  .title-light {
+    font-size: 24px;
+  }
+
+  .title-dark {
+    font-size: 24px;
+  }
+
+  .metadata-light {
+    font-size: 18px;
+  }
+
+  .metadata-dark {
+    font-size: 18px;
+  }
+
+  .post h2, .user h2 {
+    font-size: 33px;
+  }
+
+  .comment-light {
+    font-size: 19px;
+  }
+
+  .comment-dark {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+
+  .nav-link {
     font-size: 23px;
   }
 
